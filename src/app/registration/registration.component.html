@@ -1,0 +1,101 @@
+<div class="registration-container">
+    <h2>User Registration</h2>
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="firstname">First Name</label>
+        <input 
+          type="text" 
+          id="firstname" 
+          formControlName="firstname"
+          [class.invalid]="registrationForm.get('firstname')?.invalid && registrationForm.get('firstname')?.touched"
+        >
+        @if (registrationForm.get('firstname')?.invalid && registrationForm.get('firstname')?.touched) {
+          <div class="error-message">
+            @if (registrationForm.get('firstname')?.errors?.['required']) {
+              <div>First name is required</div>
+            }
+            @if (registrationForm.get('firstname')?.errors?.['minlength']) {
+              <div>Minimum 2 characters required</div>
+            }
+          </div>
+        }
+      </div>
+  
+      <div class="form-group">
+        <label for="lastname">Last Name</label>
+        <input 
+          type="text" 
+          id="lastname" 
+          formControlName="lastname"
+          [class.invalid]="registrationForm.get('lastname')?.invalid && registrationForm.get('lastname')?.touched"
+        >
+        @if (registrationForm.get('lastname')?.invalid && registrationForm.get('lastname')?.touched) {
+          <div class="error-message">
+            @if (registrationForm.get('lastname')?.errors?.['required']) {
+              <div>Last name is required</div>
+            }
+            @if (registrationForm.get('lastname')?.errors?.['minlength']) {
+              <div>Minimum 2 characters required</div>
+            }
+          </div>
+        }
+      </div>
+  
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input 
+          type="email" 
+          id="email" 
+          formControlName="email"
+          [class.invalid]="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched"
+        >
+        @if (registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched) {
+          <div class="error-message">
+            @if (registrationForm.get('email')?.errors?.['required']) {
+              <div>Email is required</div>
+            }
+            @if (registrationForm.get('email')?.errors?.['email']) {
+              <div>Invalid email format</div>
+            }
+          </div>
+        }
+      </div>
+  
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input 
+          type="password" 
+          id="password" 
+          formControlName="password"
+          [class.invalid]="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched"
+        >
+        @if (registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched) {
+          <div class="error-message">
+            @if (registrationForm.get('password')?.errors?.['required']) {
+              <div>Password is required</div>
+            }
+            @if (registrationForm.get('password')?.errors?.['minlength']) {
+              <div>Minimum 8 characters required</div>
+            }
+            @if (registrationForm.get('password')?.errors?.['pattern']) {
+              <div>Must contain uppercase, lowercase, number, and special character</div>
+            }
+          </div>
+        }
+      </div>
+  
+      <button 
+        type="submit" 
+        [disabled]="!registrationForm.valid"
+        class="submit-btn"
+      >
+        Register
+      </button>
+    </form>
+  
+    @if (submitted && registrationForm.valid) {
+      <div class="success-message">
+        Registration successful!
+      </div>
+    }
+  </div>
